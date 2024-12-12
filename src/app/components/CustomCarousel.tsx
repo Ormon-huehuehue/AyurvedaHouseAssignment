@@ -5,7 +5,7 @@ import { FaRegArrowAltCircleRight } from "react-icons/fa";
 
 const CustomCarousel = ({ imageUrl, title }: { imageUrl: string; title: string }) => {
 
-  const [isHovered, setIsHovered] = useState<Boolean>(false)
+  const [isHovered, setIsHovered] = useState<boolean>(false)
 
 
   return (
