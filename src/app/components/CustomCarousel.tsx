@@ -1,32 +1,52 @@
 "use client";
-import React from "react";
+import React, { useState} from "react";
 import { motion } from "framer-motion";
+import { FaRegArrowAltCircleRight } from "react-icons/fa";
 
-const images = [
-  "https://res.cloudinary.com/dcisswp5z/image/upload/v1711194673/cld-sample.jpg",
-];
+const CustomCarousel = ({ imageUrl, title }: { imageUrl: string; title: string }) => {
 
-const CustomCarousel = () => {
+  const [isHovered, setIsHovered] = useState<Boolean>(false)
+
+
   return (
     <motion.div
-      className="relative w-[200px] h-72 flex items-center justify-center overflow-hidden rounded-xl"
+      className="relative w-[200px] h-72 flex items-center justify-center overflow-hidden"
       whileHover={{ width: 300 }}
     >
-      <div className="relative w-full h-full flex items-center justify-center">
+      <motion.div
+        className="w-full h-full flex items-center justify-center"
+        whileHover={{ scale: 1.1 }}
+        onHoverStart={()=> setIsHovered(true)}
+        onHoverEnd={()=>setIsHovered(false)}
+        transition={{
+          type: "spring",
+          stiffness: 300,
+          damping: 20,
+          duration: 0.5,
+        }}
+      >
         <motion.img
-          src={images[0]}
+          src={imageUrl}
           alt="Carousel image"
           className="absolute w-72 h-full object-cover"
-          whileHover={{ scale: 1.1 }}
-          onHoverEnd={() => {}}
-          transition={{
-            type: "spring",
-            stiffness: 300,
-            damping: 20, // Controls how much the spring overshoots
-            duration: 0.5,
-          }}
+          style={{ filter: "blur(1px)" }}
+          whileHover={{ filter: "blur(0px)" }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
         />
-      </div>
+      </motion.div>
+      <h1 className="absolute top-3 left-3 font-bold font-sans text-wrap w-[80%]">
+        {title}
+      </h1>
+      {isHovered ? 
+      <motion.button className="absolute top-3 right-3 font-bold font-sans"
+      initial={{ opacity: 0, scale:0 }}
+      animate={{ opacity: 1,scale : 1.3 }}
+      transition={{ duration: 0.3 }}
+
+      >
+        <FaRegArrowAltCircleRight />
+      </motion.button>
+      : null}
     </motion.div>
   );
 };
