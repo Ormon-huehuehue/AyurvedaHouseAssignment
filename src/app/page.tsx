@@ -11,7 +11,7 @@ const images = [
 
 const Carousel = () => {
   return (
-    <div className="relative w-[800px] h-72 flex items-center justify-center overflow-hidden">
+    <div className="relative w-[800px] h-72 flex items-center justify-center overflow-hidden rounded-xl">
       <div className="relative w-full h-full flex items-center justify-center">
         {images.map((src, index) => (
           <motion.img
@@ -22,13 +22,16 @@ const Carousel = () => {
             style={{ 
               left: `${index * 30}%`,
             }}
-            animate={{ x: -10 }}
-            whileHover={{ x: 0, scale: 1.2, zIndex: 10 }}
+            animate={{
+              x: index === 0 ? -50 : index === images.length - 1 ? 50 : 0,
+            }}
+            whileHover={{ scale: 1.2, zIndex: 10, x: 0 }}
             transition={{ 
               type : "tween",
               ease :"linear",
               duration : 0.1
-             }}
+             
+            }}
           />
         ))}
       </div>
