@@ -1,5 +1,4 @@
-"use client";
-import React, { useState } from "react";
+import React from "react";
 import CustomCarousel from "./components/CustomCarousel";
 
 
@@ -17,7 +16,6 @@ const titles = [
 
 
 export default function Home() {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   return (
     <div className="flex items-center justify-center min-h-screen bg-white">
       <div className=  'flex overflow-hidden rounded-xl'>
